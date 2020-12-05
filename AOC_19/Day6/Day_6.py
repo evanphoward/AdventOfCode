@@ -1,5 +1,5 @@
 planets = {}
-reverse_planets = {}
+neighbors = {}
 i = 0
 
 
@@ -12,24 +12,29 @@ def total_orbit(p, count):
 
 def search(node, length, seen):
     seen = seen.copy()
-    if node in seen or node == "COM" or node not in reverse_planets.keys():
-        return 100000
-    if planets[node] == "SAN" or reverse_planets[node] == "SAN":
+    if node in seen:
+        return 1000000
+    if "SAN" in neighbors[node]:
         return length
     seen.add(node)
-    if node not in reverse_planets.keys():
-        return search(planets[node], length + 1, seen)
-    return min(search(planets[node], length + 1, seen), search(reverse_planets[node], length + 1, seen))
+    return min([search(plan, length + 1, seen) for plan in neighbors[node]])
 
 
 for line in open("input").readlines():
     inner, outer = line.strip().split(")")
     planets[outer] = inner
-    reverse_planets[inner] = outer
+    if inner not in neighbors.keys():
+        neighbors[inner] = {outer}
+    else:
+        neighbors[inner].add(outer)
+    if outer not in neighbors.keys():
+        neighbors[outer] = {inner}
+    else:
+        neighbors[outer].add(inner)
 
 total = 0
 for planet in planets.keys():
     total += total_orbit(planet, 0)
 
-print("Part One: ", total)
-print("Part One: ", search(planets["YOU"], 0, set()))
+print("Part 1:", total)
+print("Part 2:", search(planets["YOU"], 0, set()))
