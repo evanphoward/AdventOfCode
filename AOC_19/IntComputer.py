@@ -25,8 +25,6 @@ class IntProcess:
             self.prog[params[2] + (mode[2] // 2 * self.rb)] = first_value * second_value
         elif opcode == 3:
             self.prog[params[0] + (mode[0] // 2 * self.rb)] = int(input("In?"))
-        elif opcode == 4:
-            print(first_value)
         elif opcode == 5:
             if first_value != 0:
                 self.ip = self.value(mode, params, 1)
