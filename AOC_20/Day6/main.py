@@ -1,28 +1,15 @@
-lines = [line for line in open("input").readlines()]
-total = 0
-groups = [set()]
-groups_2 = [list()]
-groups_3 = [0]
+groups = [list()]
+group_count = [0]
 i = 0
-for line in lines:
+for line in open("input").readlines():
     if line == "\n":
-        total += len(groups[i])
-        groups.append(set())
-        groups_2.append(list())
-        groups_3.append(0)
+        groups.append(list())
+        group_count.append(0)
         i += 1
     else:
-        groups_3[i] += 1
-    for char in line.strip():
-        groups[i].add(char)
-        groups_2[i].append(char)
+        group_count[i] += 1
+        for char in line.strip():
+            groups[i].append(char)
 
-
-print(sum([len(group) for group in groups]))
-total = 0
-for i in range(len(groups)):
-    for char in groups[i]:
-        if sum(x == char for x in groups_2[i]) == groups_3[i]:
-            total += 1
-
-print(total)
+print("Part 1:", sum([len(set(group)) for group in groups]))
+print("Part 2:", sum(sum(sum(x == char for x in groups[i]) == group_count[i] for char in set(groups[i])) for i in range(len(groups))))
