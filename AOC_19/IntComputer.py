@@ -1,29 +1,48 @@
 class IntProcess:
-    def __init__(self, program):
-        self.prog = [int(i) for i in program.readline().split(",")]
-        for i in range(10000000):
-            self.prog.append(0)
+    def __init__(self, program=False):
+        if program:
+            self.prog = [int(i) for i in program.readline().split(",")]
         self.ip = 0
         self.rb = 0
 
+    def clone(self):
+        copy = IntProcess()
+        copy.prog = self.prog.copy()
+        copy.ip = self.ip
+        copy.rb = self.rb
+        return copy
+
+    def allocate(self, needed_index):
+        for i in range(needed_index - len(self.prog) + 1):
+            self.prog.append(0)
+
     def value(self, mode, params, index):
         if mode[index] == 0:
+            if params[index] >= len(self.prog):
+                self.allocate(params[index])
             return self.prog[params[index]]
         if mode[index] == 1:
             return params[index]
         if mode[index] == 2:
+            if params[index] + self.rb >= len(self.prog):
+                self.allocate(params[index] + self.rb)
             return self.prog[self.rb + params[index]]
-        return self.prog[params[index]] if mode[index] == 0 else params[index]
 
     def do_op(self, opcode, mode, params):
         first_value = self.value(mode, params, 0)
         if len(params) > 2:
             second_value = self.value(mode, params, 1)
         if opcode == 1:
+            if params[2] + (mode[2] // 2 * self.rb) >= len(self.prog):
+                self.allocate(params[2] + (mode[2] // 2 * self.rb))
             self.prog[params[2] + (mode[2] // 2 * self.rb)] = first_value + second_value
         elif opcode == 2:
+            if params[2] + (mode[2] // 2 * self.rb) >= len(self.prog):
+                self.allocate(params[2] + (mode[2] // 2 * self.rb))
             self.prog[params[2] + (mode[2] // 2 * self.rb)] = first_value * second_value
         elif opcode == 3:
+            if params[0] + (mode[2] // 2 * self.rb) >= len(self.prog):
+                self.allocate(params[0] + (mode[2] // 2 * self.rb))
             self.prog[params[0] + (mode[0] // 2 * self.rb)] = int(input("In?"))
         elif opcode == 5:
             if first_value != 0:
@@ -32,8 +51,12 @@ class IntProcess:
             if first_value == 0:
                 self.ip = self.value(mode, params, 1)
         elif opcode == 7:
+            if params[2] + (mode[2] // 2 * self.rb) >= len(self.prog):
+                self.allocate(params[2] + (mode[2] // 2 * self.rb))
             self.prog[params[2] + (mode[2] // 2 * self.rb)] = int(first_value < second_value)
         elif opcode == 8:
+            if params[2] + (mode[2] // 2 * self.rb) >= len(self.prog):
+                self.allocate(params[2] + (mode[2] // 2 * self.rb))
             self.prog[params[2] + (mode[2] // 2 * self.rb)] = int(first_value == second_value)
         elif opcode == 9:
             self.rb += first_value
@@ -67,6 +90,8 @@ class IntProcess:
                     self.ip -= 2
                     return out
                 else:
+                    if params[0] + (mode[0] // 2 * self.rb) >= len(self.prog):
+                        self.allocate(params[0] + (mode[0] // 2 * self.rb))
                     self.prog[params[0] + (mode[0] // 2 * self.rb)] = inp[inp_i]
                     inp_i += 1
                     continue
