@@ -1,14 +1,11 @@
 nums = [int(x.strip()) for x in open("input").readlines()]
 
-i = 0
 invalid = 0
-for num in nums[25:]:
-    curr_numbers = nums[i:25+i]
-    sums = set([n_1 + n_2 for n_1 in curr_numbers for n_2 in curr_numbers if n_1 != n_2])
-    if num not in sums:
-        invalid = num
+for i in range(25, len(nums)):
+    curr_numbers = nums[i-25:i]
+    if nums[i] not in set([n_1 + n_2 for n_1 in curr_numbers for n_2 in curr_numbers if n_1 != n_2]):
+        invalid = nums[i]
         break
-    i += 1
 print("Part 1:", invalid)
 
 for i in range(len(nums)):
