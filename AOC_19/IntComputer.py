@@ -41,7 +41,7 @@ class IntProcess:
                 self.allocate(params[2] + (mode[2] // 2 * self.rb))
             self.prog[params[2] + (mode[2] // 2 * self.rb)] = first_value * second_value
         elif opcode == 3:
-            if params[0] + (mode[2] // 2 * self.rb) >= len(self.prog):
+            if params[0] + (mode[0] // 2 * self.rb) >= len(self.prog):
                 self.allocate(params[0] + (mode[2] // 2 * self.rb))
             self.prog[params[0] + (mode[0] // 2 * self.rb)] = int(input("In?"))
         elif opcode == 5:
