@@ -1,9 +1,8 @@
 adapters = sorted([int(line.strip()) for line in open("input").readlines()] + [0])
 adapters.append(max(adapters) + 3)
 
-ones = sum([1 for i in range(1, len(adapters)) if adapters[i] - adapters[i - 1] == 1])
-threes = sum([1 for i in range(1, len(adapters)) if adapters[i] - adapters[i - 1] == 1])
-print("Part 1:", ones * threes)
+print("Part 1:", sum([adapters[i] - adapters[i - 1] == 1 for i in range(1, len(adapters))]) *
+      sum([adapters[i] - adapters[i - 1] == 1 for i in range(1, len(adapters))]))
 
 ways = [0]*(len(adapters))
 ways[0] = 1
