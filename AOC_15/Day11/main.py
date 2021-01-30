@@ -31,8 +31,8 @@ def valid(password):
 passwd = "cqjxjnds"
 while not valid(passwd):
     passwd = step(passwd)
-print(passwd)
+print("Part 1:", passwd)
 passwd = step(passwd)
 while not valid(passwd):
     passwd = step(passwd)
-print(passwd)
+print("Part 2:", passwd)
