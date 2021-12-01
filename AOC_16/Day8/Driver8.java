@@ -4,12 +4,11 @@ import java.io.*;
 public class Driver8
 {
    private static int[][] panel;
-   private static final int COUNT = 153;
+   private static final int COUNT = 145;
    public static void main(String[] args) throws Exception
    {
       Scanner infile = new Scanner(new File("instructions.txt")); 
       String col,times;
-      int total =0;
       
       String[] instruc = new String[COUNT];
       panel = new int[50][6];
@@ -60,15 +59,19 @@ public class Driver8
          }
       }
       
+      int count = 0;
       for(int r=0;r<6;r++){
          for(int c=0;c<50;c++) {
-            if(panel[c][r]==1)
+            if(panel[c][r]==1) {
                System.out.print("#");
+               count++;
+            }
             else
                System.out.print(" ");
          }
          System.out.println("");
       }
+      System.out.println("Part 1: " + count);
             
                            
    }

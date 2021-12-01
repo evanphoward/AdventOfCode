@@ -5,8 +5,7 @@ public class Driver1
 {
    public static void main(String[] args) throws Exception
    {
-      int count = 0;
-      Scanner infile = new Scanner(new File("Day1/directions.txt"));
+      Scanner infile = new Scanner(new File("directions.txt"));
     
       String direc = infile.nextLine();
       infile.close();

@@ -4,7 +4,7 @@ import java.io.*;
    
 public class Driver6
 {
-   private static final int COUNT = 572;
+   private static final int COUNT = 598;
    private static final int LETTERS = 8;
    public static void main(String[] args) throws Exception
    {
@@ -12,7 +12,9 @@ public class Driver6
       String[] message = new String[COUNT];
       int[] letters = new int[26];
       int min,minlet;
-      String mess = "";
+      int max,maxlet;
+      String mess1 = "";
+      String mess2 = "";
    
       Scanner infile = new Scanner(new File("message.txt"));
    
@@ -32,15 +34,24 @@ public class Driver6
       
             
          min=minlet=100;
-         for(int k=0;k<26;k++)
+         max = maxlet = 0;
+         for(int k=0;k<26;k++) {
+            if(letters[k] > max) {
+               max = letters[k];
+               maxlet = k;
+            }
             if(letters[k]<min) {
                min=letters[k];
                minlet=k;
             }
+         }
             
-         mess=mess+intToLetter(minlet);
+         mess1 = mess1 + intToLetter(maxlet);
+         mess2=mess2+intToLetter(minlet);
       }
-      System.out.println(mess);
+
+      System.out.println("Part 1: " + mess1);
+      System.out.println("Part 2: " + mess2);
          
       
    

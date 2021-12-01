@@ -1,7 +1,7 @@
 /**
  * Created by evanphoward on 3/31/17.
  */
-public class Day19 {
+public class Day18 {
     private static final String FIRST = ".^^^.^.^^^^^..^^^..^..^..^^..^.^.^.^^.^^....^.^...^.^^.^^.^^..^^..^.^..^^^.^^...^...^^....^^.^^^^^^^";
     private static final int LENGTH = 400000;
     public static void main(String[] args) {

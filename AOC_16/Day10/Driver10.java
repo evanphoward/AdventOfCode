@@ -7,7 +7,7 @@ public class Driver10
    public static void main(String[] args) throws Exception
    {
       String botNum,lowO,highO,value;
-      int jump,count;
+      int jump;
       Scanner infile = new Scanner(new File("instructions.txt")); 
       
       String[] instruc = new String[COUNT];
@@ -69,13 +69,16 @@ public class Driver10
       
       end:
       while(true) {
-         count=0;
-         for(bot b : bots) {
+         for(int i = 0; i < 210; i++) {
+            bot b = bots[i];
             if(output[0]!=0&&output[1]!=0&&output[2]!=0) {
-               System.out.println(output[0]*output[1]*output[2]+"");
+               System.out.println("Part 2: " + output[0]*output[1]*output[2]);
                break end;
             }
             if(b.getLow()!=-1 && b.getHigh()!=-1&&b.given()==false) {
+               if(b.getLow() == 17 && b.getHigh() == 61) {
+                  System.out.println("Part 1: " + i);
+               }
                b.hasGiven(true);
                if(b.getLowOutput()>=0)
                   bots[b.getLowOutput()].setValue(b.getLow());
@@ -88,7 +91,6 @@ public class Driver10
                else
                   output[b.getHighOutput()*-1]=b.getHigh();
             }
-            count++;
          }
       }
             

@@ -3,21 +3,21 @@ import java.util.*;
 import java.io.*;
 public class Driver4
 {
-   private static final int COUNT = 1066;
+   private static final int COUNT = 1091;
    public static void main(String[] args) throws Exception
    {
       int check,id,max;
       int cool=0;
+      int sum = 0;
       int counter=0;
       int pcounter=0;
       int[] temparr = new int[26];
       char[] rmax = new char[5];
       String checksum,codes,encrypt,unencrypt,ttemp;
-      char tttemp;
       String[] temp;
       int[] letters = new int[26];
       ttemp = unencrypt = "";
-      int total=0;
+
       Scanner infile = new Scanner(new File("rooms.txt"));
    
       for(int i=0;i<COUNT;i++) {
@@ -78,6 +78,7 @@ public class Driver4
             if(checksum.charAt(k)!=rmax[k])
                break;
             if(k==4) {
+               sum += id;
                for(int j=0;j<encrypt.length();j++) {
                   if(encrypt.charAt(j)=='-')
                      unencrypt=unencrypt+' ';
@@ -89,11 +90,12 @@ public class Driver4
                   }
                }
                if(unencrypt.equals("northpole object storage"))
-                  System.out.print(id+"");
+                  System.out.println("Part 2: " + id + "");
             }
          }
                
       }
+      System.out.println("Part 1: " + sum + "");
    }
    private static int letterToInt(char x) {
       switch(x) {
