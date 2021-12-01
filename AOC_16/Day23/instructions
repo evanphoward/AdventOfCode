@@ -17,8 +17,8 @@ jnz d -2
 tgl c
 cpy -16 c
 jnz 1 c
-cpy 87 c
-jnz 74 d
+cpy 73 c
+jnz 91 d
 inc a
 inc d
 jnz d -2

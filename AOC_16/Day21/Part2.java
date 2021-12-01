@@ -95,8 +95,11 @@ public class Part2 {
 
             }
         }
+
+        System.out.print("Part 2: ");
         for(char c : pass)
             System.out.print(c);
+        System.out.println("");
 
     }
 

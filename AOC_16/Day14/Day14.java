@@ -1,33 +1,49 @@
 //Evan Howard 19 March 2017
-import java.security.*;
-//import java.math.*;
-//import java.nio.charset.StandardCharsets;
+import java.io.File;
+import java.util.Scanner;
 
-    public class Day14
-    {
-        private static String s = "ngcjuoqr";
-        public static void main(String[] args) throws Exception
-        {
-            int counter=0;
-            String hash;
+public class Day14
+{
+    public static void main(String[] args) throws Exception {
+        int counter = 0;
+        int total=0;
+        char temp;
+        String hash;
 
-            for(int i=0;counter<64;i++) {
-                hash=md5(s+i);
-                for(int k=2;k<hash.length();k++) {
-                    if(hash.charAt(k)==hash.charAt(k-1) && hash.charAt(k)==hash.charAt(k-2) && hash.charAt(k)!=hash.charAt(k-3) && hash.charAt(k)!=hash.charAt(k+1)) {
-                    }
-                }
+        Scanner infile = new Scanner(new File("hashes"));
+        Scanner pinfile = new Scanner(new File("hashes"));
 
-            }
+        while (pinfile.hasNext()) {
+            total++;
+            pinfile.nextLine();
         }
-        private static String md5(String s) throws Exception {
-            MessageDigest m=MessageDigest.getInstance("MD5");
-            m.update(s.getBytes());
-            byte[] digest = m.digest();
-            StringBuffer sb = new StringBuffer();
-            for(byte b : digest) {
-                sb.append(String.format("%02x", b & 0xff));
+        pinfile.close();
+
+        String[] hashes = new String[total];
+
+        for(int i=0;i<hashes.length;i++)
+            hashes[i]=infile.nextLine();
+
+        infile.close();
+
+        for(int i=0;counter<64;i++) {
+            hash = hashes[i];
+            for (int k = 2; k < hash.length(); k++) {
+                if (hash.charAt(k) == hash.charAt(k - 1) && hash.charAt(k) == hash.charAt(k - 2)) {
+                    temp = hash.charAt(k);
+                    out:
+                    for (int j = i + 1; j <= i + 1000; j++) {
+                        hash = hashes[j];
+                        for (int l = 4; l < hash.length(); l++)
+                            if (hash.charAt(l) == temp && hash.charAt(l) == hash.charAt(l - 1) && hash.charAt(l) == hash.charAt(l - 2) && hash.charAt(l) == hash.charAt(l - 3) && hash.charAt(l) == hash.charAt(l - 4)) {
+                                counter++;
+                                System.out.println(i);
+                                break out;
+                            }
+                    }
+                    break;
+                }
             }
-            return sb.toString();
         }
     }
+}

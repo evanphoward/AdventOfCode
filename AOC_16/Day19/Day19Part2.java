@@ -1,7 +1,7 @@
 
 import java.util.LinkedList;
 public class Day19Part2 {
-    private static final int NUMELVES = 3018458;
+    private static final int NUMELVES = 3005290;
     public static void main(String[] args) {
         LinkedList<Integer> que1 = new LinkedList<>();
         LinkedList<Integer> que2 = new LinkedList<>();

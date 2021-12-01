@@ -29,7 +29,6 @@ public class Day22 {
                 if (used[a] <= avail[b])
                     count++;
 
-        System.out.print(count);
-
-            }
+        System.out.println("Part 1: " + count);
     }
+}

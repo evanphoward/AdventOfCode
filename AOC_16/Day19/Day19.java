@@ -2,7 +2,7 @@
  * Created by evanphoward on 4/5/17.
  */
 public class Day19 {
-    private static final int NUMELVES = 3018458;
+    private static final int NUMELVES = 3005290;
     public static void main(String[] args) {
         boolean found;
         int skip,presents,last;

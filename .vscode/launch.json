@@ -10,6 +10,13 @@
             "request": "launch",
             "mainClass": "${file}",
             "cwd": "${fileDirname}"
+        },
+        {
+            "type": "python",
+            "name": "Run Python",
+            "request": "launch",
+            "program": "${file}",
+            "cwd": "${fileDirname}"
         }
     ]
 }
