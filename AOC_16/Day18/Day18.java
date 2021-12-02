@@ -2,16 +2,19 @@
  * Created by evanphoward on 3/31/17.
  */
 public class Day18 {
-    private static final String FIRST = ".^^^.^.^^^^^..^^^..^..^..^^..^.^.^.^^.^^....^.^...^.^^.^^.^^..^^..^.^..^^^.^^...^...^^....^^.^^^^^^^";
-    private static final int LENGTH = 400000;
+    private static final String FIRST = "^^^^......^...^..^....^^^.^^^.^.^^^^^^..^...^^...^^^.^^....^..^^^.^.^^...^.^...^^.^^^.^^^^.^^.^..^.^";
     public static void main(String[] args) {
-        String[] grid = new String[LENGTH];
+        System.out.println("Part 1: " + safeTiles(FIRST, 40));
+        System.out.println("Part 2: " + safeTiles(FIRST, 400000));
+    }
+    private static int safeTiles(String startingRow, int length) {
+        String[] grid = new String[length];
         int safe = 0;
         boolean[] previ,curr;
-        String prev = FIRST;
+        String prev = startingRow;
         curr = new boolean[prev.length()];
         grid[0]=FIRST;
-        for(int i=1;i<LENGTH;i++) {
+        for(int i=1;i<length;i++) {
             prev="."+prev+".";
             previ = convertToBool(prev);
             for(int k=1;k<prev.length()-1;k++) {
@@ -30,9 +33,7 @@ public class Day18 {
                 if(s.charAt(i)=='.')
                     safe++;
         }
-       System.out.print(safe+"");
-
-
+       return safe;
     }
     private static boolean isTrap(boolean l, boolean c, boolean r) {
         if(l && c && !r)

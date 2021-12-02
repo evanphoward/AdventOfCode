@@ -11,7 +11,7 @@ public class Day23 {
     public static void main(String[] args) throws Exception
     {
         b=d=c=0;
-        a=12;
+        a=7;
         String[] temp = new String[3];
         instruc = new String[COUNT];
         Scanner infile = new Scanner(new File("instructions"));

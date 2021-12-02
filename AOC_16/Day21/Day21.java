@@ -85,10 +85,11 @@ public class Day21 {
                     break;
 
             }
-            for(char c : pass)
-                System.out.print(c);
-            System.out.println("");
         }
 
+        System.out.print("Part 1: ");
+        for(char c : pass)
+                System.out.print(c);
+        System.out.println("");
     }
 }

@@ -3,16 +3,12 @@
  */
 
 public class Driver16 {
-    private static final int LENGTH = 35651584;
-    private static final String INPUT = "10001110011110000";
+    private static final String INPUT = "00111101111101000";
     public static void main(String [] args) {
-
-        String output = driveData(INPUT,LENGTH);
-
-        System.out.print(driveChecksum(output));
-
-
+        System.out.println("Part 1: " + driveChecksum(driveData(INPUT,272)));
+        System.out.println("Part 2: " + driveChecksum(driveData(INPUT,35651584)));
     }
+
     private static String driveChecksum(String input) {
         StringBuilder sb = new StringBuilder();
 
@@ -27,8 +23,8 @@ public class Driver16 {
         }
 
         return checksum;
-
     }
+
     public static String driveData(String a, int driveLength) {
 
         String b = new StringBuffer(a).reverse().toString();
@@ -43,9 +39,6 @@ public class Driver16 {
             toReturn = driveData(toReturn, driveLength);
         }
 
-        toReturn = toReturn.substring(0, driveLength);
-
-        return toReturn;
-
+        return toReturn.substring(0, driveLength);
     }
 }
