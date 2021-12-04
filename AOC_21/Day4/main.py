@@ -1,14 +1,6 @@
-bingo = [int(x) for x in open("input").readline().strip().split(",")]
-boards = []
-board_checks = []
-curr_board = []
-for line in open("input").readlines()[2:]:
-    if line == "\n":
-        boards.append(curr_board)
-        board_checks.append([[False] * 5 for _ in range(5)])
-        curr_board = []
-    else:
-        curr_board.append([int(x) for x in line.strip().split()])
+bingo = list(map(int, open("input").readline().strip().split(",")))
+boards = [[list(map(int, line.strip().split())) for line in board.split("\n")] for board in open("input").read().split("\n\n")[1:]]
+board_checks = [[[False] * 5 for _ in range(5)] for _ in range(len(boards))]
 
 num_to_pos = dict()
 for j, board in enumerate(boards):
