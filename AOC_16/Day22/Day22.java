@@ -6,7 +6,7 @@ import java.util.*;
  */
 public class Day22 {
     public static void main(String[] args) throws Exception {
-        Scanner infile = new Scanner(new File("nodes"));
+        Scanner infile = new Scanner(new File("input"));
         int count=0;
         List<String[]> temp = new ArrayList<>();
         while(infile.hasNext())
