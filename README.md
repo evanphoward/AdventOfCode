@@ -15,3 +15,4 @@ My individual leaderboard placements thus far:
 | 2021 / 2 / 2      | 45th  |
 | 2021 / 5 / 1      | 79th  |
 | 2021 / 5 / 2      | 99th  |
+| 2021 / 7 / 1      | 99th  |
