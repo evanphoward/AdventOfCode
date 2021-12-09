@@ -1,15 +1,10 @@
 from collections import Counter
-two, three = 0, 0
-for line in open("input").readlines():
-    counter = Counter(line.strip())
-    tw, th = True, True
-    for l in line:
-        num = counter[l]
-        if num == 2 and tw:
-            two += 1
-            tw = False
-        if num == 3 and th:
-            three += 1
-            th = False
-
-print(two * three)
+import difflib
+print("Part 1:", sum(3 in Counter(line.strip()).values() for line in open("input").readlines()) *
+                 sum(2 in Counter(line.strip()).values() for line in open("input").readlines()))
+for line_a in open("input").read().split("\n"):
+    for line_b in open("input").read().split("\n"):
+        differences = list(difflib.ndiff(line_a, line_b))
+        if len(differences) - len(line_a) == 1:
+            print("Part 2:", ''.join(c[-1] for c in differences if '-' not in c and '+' not in c))
+            exit()
