@@ -1,22 +1,28 @@
-points = [tuple(map(int, line.strip().split(", "))) for line in open("input").readlines()]
-max_x = max(point[0] for point in points) + 1
-max_y = max(point[1] for point in points) + 1
+from collections import deque
 
-areas = [0] * len(points)
-close_area = 0
+inp = deque(map(int, open("input").readline().split()))
+nodes = []
+node_parents = []
+while inp:
+    if node_parents:
+        if len(nodes[node_parents[-1]][2]) == nodes[node_parents[-1]][0]:
+            finished_parent = node_parents.pop()
+            for _ in range(nodes[finished_parent][1]):
+                nodes[finished_parent][3].append(inp.popleft())
+        else:
+            nodes[node_parents[-1]][2].append(len(nodes))
+            node_parents.append(len(nodes))
+            nodes.append((inp.popleft(), inp.popleft(), [], []))
+    else:
+        node_parents.append(len(nodes))
+        nodes.append((inp.popleft(), inp.popleft(), [], []))
 
-for x in range(max_x):
-    for y in range(max_y):
-        min_distance = min(abs(x - point[0]) + abs(y - point[1]) for point in points)
-        closest = [i for i, point in enumerate(points) if abs(x - point[0]) + abs(y - point[1]) == min_distance]
-        if len(closest) == 1:
-            if x == 0 or x == max_x or y == 0 or y == max_y:
-                areas[closest[0]] = -1
-            if areas[closest[0]] != -1:
-                areas[closest[0]] += 1
+print("Part 1:", sum(sum(x[3]) for x in nodes))
 
-        if sum(abs(x - point[0]) + abs(y - point[1]) for point in points) < 10000:
-            close_area += 1
 
-print("Part 1:", max(areas))
-print("Part 2:", close_area)
+def value(i=0):
+    node = nodes[i]
+    return sum(node[3]) if node[0] == 0 else sum(value(node[2][child - 1]) for child in node[3] if 0 < child <= node[0])
+
+
+print("Part 2:", value())
