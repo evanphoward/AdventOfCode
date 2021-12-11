@@ -1,5 +1,4 @@
 from collections import deque
-inp = [line for line in open("input").read().split("\n")]
 closer = {"(": ")", "{": "}", "<": ">", "[": "]"}
 closer_scores_1 = {")": 3, "]": 57, "}": 1197, ">": 25137}
 closer_scores_2 = {")": 1, "]": 2, "}": 3, ">": 4}
