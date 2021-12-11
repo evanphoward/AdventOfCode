@@ -6,12 +6,13 @@ GOAL = (2, 1)
 STARTING_POS = (1, 1)
 
 
-def parse_maze():
-    maze = dict()
-    for r, row in enumerate(open("input").readlines()):
+def parse_grid():
+    grid = dict()
+    inp = open("input").readlines()
+    for r, row in enumerate(inp):
         for c, cell in enumerate(row):
-            maze[r, c] = cell
-    return maze
+            grid[r, c] = cell
+    return grid, len(inp), len(inp[0])
 
 
 def bfs(maze, p1):
@@ -33,7 +34,7 @@ def bfs(maze, p1):
     return -1
 
 
-maze_setup = parse_maze()
+maze_setup, height, width = parse_grid()
 print(bfs(maze_setup, True))
 print(bfs(maze_setup, False))
 
