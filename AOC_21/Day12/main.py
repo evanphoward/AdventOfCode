@@ -7,24 +7,17 @@ for line in open("input").readlines():
 
 
 def num_paths(p1):
-    bfs_q = deque()
+    bfs_q = deque([("start", ["start"], False)])
     paths = 0
-    bfs_q.append((0, "start", ["start"], False))
     while bfs_q:
-        steps, pos, path, has_two = bfs_q.popleft()
+        pos, path, has_two = bfs_q.popleft()
         if pos == "end":
             paths += 1
             continue
         for node in neighbors[pos]:
-            if node == "start":
+            if node == "start" or (node.islower() and node in path and (has_two or p1)):
                 continue
-            if node.islower() and node in path:
-                if has_two or p1:
-                    continue
-                else:
-                    bfs_q.append((steps + 1, node, path + [node], True))
-            else:
-                bfs_q.append((steps + 1, node, path + [node], has_two))
+            bfs_q.append((node, path + [node], True if node.islower() and node in path else has_two))
     return paths
 
 
