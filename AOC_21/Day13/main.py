@@ -21,7 +21,7 @@ print("Part 2:")
 for y in range(max(g[1] for g in grid) + 1):
     for x in range(max(g[0] for g in grid) + 1):
         if (x, y) in grid:
-            print("#", end="")
+            print("█", end="")
         else:
-            print(".", end="")
+            print(" ", end="")
     print()
