@@ -1,7 +1,6 @@
 import heapq
 STARTING_POS = (0, 0)
 WIDTH = len(open("input").readlines())
-GOAL = (WIDTH - 1, WIDTH - 1)
 
 
 def parse_grid(p1):
