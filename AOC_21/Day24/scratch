@@ -1,3 +1,12 @@
+# I did this day entirely by hand using the notes that exist in this text file
+# inp[4] + 5 == inp[7]
+# inp[1] - 1 == inp[8]
+# inp[10] + 8 == inp[11]
+# inp[9] - 2 == inp[12]
+# inp[0] - 8 == inp[13]
+# 99394899891971
+# 92171126131911
+
 inp w
 eql x 0
 add y w # y = w

@@ -6,15 +6,30 @@ First solutions were in early 2017 for the 2016 version and I've filled in the o
 
 My individual leaderboard placements thus far:
 
-| Year / Day / Part | Place |
-| ----------------- | ----- |
-| 2017 / 12 / 1     | 69th  |
-| 2020 / 10 / 1     | 81st  |
-| 2020 / 21 / 1     | 81st  |
-| 2021 / 1 / 1      | 17th  |
-| 2021 / 2 / 2      | 45th  |
-| 2021 / 5 / 1      | 79th  |
-| 2021 / 5 / 2      | 99th  |
-| 2021 / 7 / 1      | 99th  |
-| 2021 / 12 / 1     | 25th  |
-| 2021 / 12 / 2     | 75th  |
+
+2017 (Total Points 32):
+
+| Day / Part | Place |
+| -----------| ----- |
+| 12 / 1     | 69th  |
+
+2020 (Total Points 40):
+
+| Day / Part | Place |
+| -----------| ----- |
+| 10 / 1     | 81st  |
+| 21 / 1     | 81st  |
+
+2021 (Total Points 315):
+
+| Day / Part | Place |
+| -----------| ----- |
+| 1 / 1      | 17th  |
+| 2 / 2      | 45th  |
+| 5 / 1      | 79th  |
+| 5 / 2      | 99th  |
+| 7 / 1      | 99th  |
+| 12 / 1     | 25th  |
+| 12 / 2     | 75th  |
+| 24 / 1     | 85th  |
+| 24 / 2     | 70th  |
