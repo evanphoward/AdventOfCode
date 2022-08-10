@@ -1,59 +1,40 @@
-from functools import cmp_to_key
+from collections import defaultdict
 
-def print_carts(cts):
-    cart_pos = dict()
-    for r, c, heading, _ in cts:
-        cart_pos[(r, c)] = heading
-    for r in range(65, 75):
-        for c in range(5, 15):
-            if (r, c) in cart_pos:
-                print(['^', '>', 'v', '<'][cart_pos[(r, c)]], end='')
-            else:
-                print(map[r][c], end='')
-        print()
-    print()
+class Cart:
+    def __init__(self, x, y, heading):
+        self.x = x
+        self.y = y
+        self.heading = heading
+        self.turn = 0
 
-map = open("input").read().split("\n")
-WIDTH = len(map[0])
-HEIGHT = len(map)
+map = defaultdict(lambda: "")
 carts = []
-for r in range(HEIGHT):
-    for c in range(WIDTH):
-        if map[r][c] == '^':
-            carts.append((r, c, 0, 0))
-        elif map[r][c] == '>':
-            carts.append((r, c, 1, 0))
-        elif map[r][c] == 'v':
-            carts.append((r, c, 2, 0))
-        elif map[r][c] == '<':
-            carts.append((r, c, 3, 0))
+for y, line in enumerate(open("input").read().split("\n")):
+    for x, cell in enumerate(line):
+        if cell in "^>v<":
+            heading = {"^": 0, ">": 1, "v": 2, "<": 3}[cell]
+            carts.append(Cart(x, y, heading))
+            part = {"^": "|", ">": "-", "v": "|", "<": "-"}[cell]
+        else:
+            part = cell
+        if part in "\\/+-":
+            map[(x, y)] = part
 
-correct_mapping = {'|': '|', '-': '-', '/': '/', '\\': '\\', '^': '|', 'v': '|', '<': '-', '>': '-', ' ': ' ', '+': '+'}
-map = [[correct_mapping[cell] for cell in line] for line in map]
-heading_delta = [(-1, 0), (0, 1), (1, 0), (0, -1)]
-
+deltas = [(0, -1), (1, 0), (0, 1), (-1, 0)]
 while True:
-    new_carts = []
-    pos_occupied = set()
-    for r, c, heading, turn in carts:
-        dr, dc = heading_delta[heading]
-        r += dr
-        c += dc
-        if map[r][c] == '/':
-            heading = 3 - ((heading + 2) % 4)
-        elif map[r][c] == '\\':
-            heading = 3 - heading
-        elif map[r][c] == '+':
-            if turn == 0:
-                heading = (heading - 1) % 4
-            elif turn == 2:
-                heading = (heading + 1) % 4
-            turn = (turn + 1) % 3
-
-        if (r, c) in pos_occupied:
-            print("Part 1:", "(" + str(c) + ", " + str(r) + ")")
+    carts.sort(key=lambda c: (c.y, c.x))
+    for ci, cart in enumerate(carts):
+        dx, dy = deltas[cart.heading]
+        cart.x += dx
+        cart.y += dy
+        if any(cart.x == cart2.x and cart.y == cart2.y for c2i, cart2 in enumerate(carts) if ci != c2i):
+            print("Part 1:", str(cart.x) + "," + str(cart.y))
             exit()
-        new_carts.append((r, c, heading, turn))
-        pos_occupied.add((r, c))
-    carts = sorted(new_carts, key=lambda c: (c[0], c[1]))
-    print(carts)
+        part = map[(cart.x, cart.y)]
+        if (part == "/" and cart.heading in [0, 2]) or (part == "\\" and cart.heading in [1, 3]) or (part == "+" and cart.turn == 2):
+            cart.heading = (cart.heading + 1) % 4
+        elif (part == "/" and cart.heading in [1, 3]) or (part == "\\" and cart.heading in [0, 2]) or (part == "+" and cart.turn == 0):
+            cart.heading = (cart.heading - 1) % 4
+        if part == "+":
+            cart.turn = (cart.turn + 1) % 3
+
