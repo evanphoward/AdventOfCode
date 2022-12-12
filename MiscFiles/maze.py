@@ -1,5 +1,5 @@
 # Basic template for solving days that need BFS
-# Examples: 2016 Days 11, 13, 17, 24. 2021 Day 12
+# Examples: 2016 Days 11, 13, 17, 24. 2021 Day 12, 2022 Day 12
 # Probably some more I can't find. Man, 2016 loved path-finding puzzles
 from collections import deque
 GOAL = (2, 1)
