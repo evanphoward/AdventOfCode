@@ -1,4 +1,3 @@
-from __future__ import print_function
 inp = open("input").read().strip().split("\n")
 
 p1_signals = 0
