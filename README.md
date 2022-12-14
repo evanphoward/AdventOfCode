@@ -43,3 +43,5 @@ My individual leaderboard placements thus far:
 | 11 / 2     | 39th  |
 | 12 / 1     | 34th  |
 | 12 / 2     | 68th  |
+| 14 / 1     | 12th  |
+| 14 / 2     | 8th   |
