@@ -34,7 +34,7 @@ My individual leaderboard placements thus far:
 | 24 / 1     | 85th  |
 | 24 / 2     | 70th  |
 
-2022 (Total Points 214):
+2022 (Total Points 685):
 
 | Day / Part | Place |
 | -----------| ----- |
@@ -45,3 +45,8 @@ My individual leaderboard placements thus far:
 | 12 / 2     | 68th  |
 | 14 / 1     | 12th  |
 | 14 / 2     | 8th   |
+| 19 / 1     | 39th  |
+| 19 / 2     | 9th   |
+| 22 / 2     | 36th  |
+| 24 / 1     | 49th  |
+| 24 / 2     | 83rd  |
