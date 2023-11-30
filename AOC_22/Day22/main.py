@@ -1,4 +1,6 @@
 maze_inp, direcs = open("input").read().split("\n\n")
+# ONLY PART 2 CODE HERE, PART 1 WAS OVERWRITTEN
+# HARDCODED HORROR LIES BEYOND
 
 grid = dict()
 ranges_cols = dict()
@@ -26,10 +28,6 @@ for r, row in enumerate(maze_inp.split("\n")):
             ranges_cols[c][0] = r
         if r > ranges_cols[c][1]:
             ranges_cols[c][1] = r
-
-# print(grid)
-# print(ranges_cols)
-# print(ranges_rows)
 
 dirs = [(-1, 0), (0, 1), (1, 0), (0, -1)]
 cr = min(r for (r, c) in grid.keys())
@@ -220,4 +218,4 @@ for _ in range(move):
     cc = new_c
 cc += 1
 cr += 1
-print(1000 * cr + 4 * cc + ((heading - 1) % 4))
+print("Part 2:", 1000 * cr + 4 * cc + ((heading - 1) % 4))

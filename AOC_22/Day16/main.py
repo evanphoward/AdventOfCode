@@ -26,49 +26,53 @@ for i in range(N):
     for j in range(N):
         for k in range(N):
             valve_edges[j][k] = min(valve_edges[j][k], valve_edges[j][i] + valve_edges[i][k])
+
 non_zero_valves = [valve_ids['AA']] + [valve for (valve, rate) in valve_rates.items() if rate > 0]
+num_non_zero = len(non_zero_valves)
 
 
-def fill_table(t):
-    global valve_rates, valve_edges, non_zero_valves
-    q = deque()
+def run(time):
+    queue = deque()
     best = defaultdict(lambda: -1)
 
-    def add(i, open_valves, t_left, p):
-        if t_left >= 0 and (best[(i, open_valves, t_left)] < p):
-            best[(i, open_valves, t_left)] = p
-            q.append((i, open_valves, t_left, p))
+    aa = non_zero_valves.index(valve_ids['AA'])
 
-    add(valve_ids['AA'], 0, t, 0)
-    while q:
-        cur_valve, open_valves, t_left, p = q.popleft()
-        for valve in non_zero_valves:
-            move_cost = valve_edges[cur_valve][valve]
-            if move_cost <= t_left and open_valves & (1 << valve) == 0:
-                new_valves = open_valves | (1 << valve)
-                new_t_left = t_left - valve_edges[cur_valve][valve] - 1
-                new_p = p + (new_t_left * valve_rates[valve])
-                if new_t_left >= 0 and (best[(valve, new_valves, new_t_left)] < new_p):
-                    best[(valve, new_valves, new_t_left)] = new_p
-                    q.append((valve, new_valves, new_t_left, new_p))
+    def add(i, added, v, t):
+        if t >= 0 and (best[(i, added, t)] < v):
+            best[(i, added, t)] = v
+            queue.append((i, added, v, t))
+
+    add(aa, 0, 0, time)
+    while queue:
+        i, added, v, t = queue.popleft()
+        if (added & (1 << i)) == 0 and t >= 1:
+            flow_here = (t - 1) * valve_rates[non_zero_valves[i]]
+            add(i, added | (1 << i), v + flow_here, t - 1)
+
+        for j in range(num_non_zero):
+            t_move = valve_edges[non_zero_valves[i]][non_zero_valves[j]]
+            if t_move <= t:
+                add(j, added, v, t - t_move)
+
     return best
 
 
-best_p1 = fill_table(30)
-print(max(best_p1.values()))
+print("Part 1:", max(run(30).values()))
 
-best_p2 = fill_table(26)
-valves_to_pressure = [0] * (1 << max(non_zero_valves))
-for (valve, open_valves, t), p in best_p2.items():
-    valves_to_pressure[open_valves] = max(valves_to_pressure[open_valves], p)
+best2 = run(26)
+# best => (end_node, mask_turned, time_left) => max_flow
+table = [0] * (1 << num_non_zero)
+for (i, added, t), vmax in best2.items():
+    table[added] = max(table[added], vmax)
 
-ans = 0
-for valve_perm in range(len(valves_to_pressure)):
-    valves_comp = ((1 << len(non_zero_valves)) - 1) ^ valve_perm
-    ans = max(ans, valves_to_pressure[valves_comp])
-    valve_perm2 = valve_perm
-    while valve_perm2 > 0:
-        ans = max(ans, valves_to_pressure[valves_comp] + valves_to_pressure[valve_perm2])
-        valve_perm2 = (valve_perm2 - 1) & valve_perm
+ret = 0
+for mask in range(1 << num_non_zero):
+    mask3 = ((1 << num_non_zero) - 1) ^ mask
+    ret = max(ret, table[mask3])
+    mask2 = mask
+    while mask2 > 0:
+        ret = max(ret, table[mask3] + table[mask2])
+        mask2 = (mask2 - 1) & mask
 
-print(ans)
+print("Part 2:", ret)
+
