@@ -50,3 +50,9 @@ My individual leaderboard placements thus far:
 | 22 / 2     | 36th  |
 | 24 / 1     | 49th  |
 | 24 / 2     | 83rd  |
+
+2023 (In Progress):
+
+| Day / Part | Place |
+| ---------- | ----- |
+| 1 / 1      | 89th  |
