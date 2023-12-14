@@ -8,7 +8,7 @@ STARTING_POS = (1, 1)
 
 def parse_grid():
     grid = dict()
-    inp = open("input").readlines()
+    inp = open("input").read().split("\n")
     for r, row in enumerate(inp):
         for c, cell in enumerate(row):
             grid[r, c] = cell
