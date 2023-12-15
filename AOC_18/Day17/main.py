@@ -1,61 +1,73 @@
+from collections import defaultdict
+import sys
+sys.setrecursionlimit(10000)
+
 s = open("input").read().strip()
 s = s.split("\n")
 
-walls = set()
+grid = defaultdict(lambda : '.')
 min_y, max_y = 0, 0
 for wall in s:
     if wall[0] == "x":
         wall = wall.split(", y=")
         wall_x = int(wall[0][2:])
-        wall_ys = map(int, wall[1].split(".."))
+        wall_ys = [int(x) for x in wall[1].split("..")]
         min_y = min(min_y, wall_ys[0])
         max_y = max(max_y, wall_ys[1])
         for y in range(wall_ys[0], wall_ys[1] + 1):
-            walls.add((wall_x, y))
+            grid[(wall_x, y)] = "#"
     else:
         wall = wall.split(", x=")
         wall_y = int(wall[0][2:])
-        wall_xs = map(int, wall[1].split(".."))
+        wall_xs = [int(x) for x in wall[1].split("..")]
         for x in range(wall_xs[0], wall_xs[1] + 1):
-            walls.add((x, wall_y))
+            grid[(x, wall_y)] = "#"
 
 
-def simulate_water(p1):
-    obstacles = walls.copy()
-    off_map = set()
-    while True:
-        if (500, 0) in obstacles:
-            return len(obstacles) - len(walls) + len(off_map)
-        water_x = 500
-        water_y = 0
-        while True:
-            if water_y == max_y or (water_x, water_y + 1) in off_map:
-                print(water_x, water_y)
-                off_map.add((water_x, water_y))
-                break
-            if (water_x, water_y + 1) not in obstacles:
-                water_y += 1
-                continue
-            elif (water_x - 1, water_y) not in obstacles:
-                while (water_x - 1, water_y) not in obstacles and (water_x, water_y + 1) in obstacles:
-                    water_x -= 1
-                if (water_x, water_y + 1) in off_map:
-                    obstacles.add((water_x, water_y))
-                    break
-                if (water_x, water_y + 1) not in obstacles:
-                    continue
-            elif (water_x + 1, water_y) not in obstacles:
-                while (water_x + 1, water_y) not in obstacles and (water_x, water_y + 1) in obstacles:
-                    water_x += 1
-                if (water_x, water_y + 1) in off_map:
-                    obstacles.add((water_x, water_y))
-                    break
-                if (water_x, water_y + 1) not in obstacles:
-                    continue
-            print(water_x, water_y)
-            obstacles.add((water_x, water_y))
-            break
+SAND = "."
+WALL = "#"
+WATER = "~"
+FLOW = "|"
+VOID = " "
+
+def fill(x, y, direction):
+    if grid[(x, y)] == FLOW:
+        fill(x + direction, y, direction)
+        grid[(x, y)] = WATER
+
+def flow(x, y, direction):
+    global grid
+    if y > max_y:
+        return True
+    elt = grid[(x, y)]
+    if elt != SAND:
+        return elt != WALL and elt != WATER
+
+    grid[(x, y)] = FLOW
+
+    leaks = flow(x, y + 1, 0)
+    if leaks:
+        return True
+
+    leaks_left = direction in (-1, 0) and flow(x - 1, y, -1)
+    leaks_right = direction in (0, 1) and flow(x + 1, y, 1)
+    leaks = leaks_left or leaks_right
+    if leaks:
+        return True
+
+    if direction == 0:
+        fill(x, y, -1)
+        fill(x + 1, y, 1)
+
+    return False
 
 
-print("Part 1:", simulate_water(True))
-# print("Part 2:", simulate_water(False))
+flow(500, 0, 0)
+ans = 0
+for elt in grid.values():
+    if elt not in ("#", "."):
+        ans += 1
+print(ans - min_y - 1)
+
+
+
