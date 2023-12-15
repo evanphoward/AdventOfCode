@@ -1,4 +1,7 @@
 venv/
 .idea/
+.vscode/
 *.iml
 *.class
+input
+instructions
