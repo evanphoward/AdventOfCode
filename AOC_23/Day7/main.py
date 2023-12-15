@@ -63,12 +63,14 @@ def reassign_jacks(hands):
     return new_hands
 
 
-MAPPINGS = {'J': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6,
-            '7': 7, '8': 8, '9': 9, 'T': 10, 'Q': 11, 'K': 12, 'A': 13}
-inp = [(tuple(MAPPINGS[y] for y in x.split()[0]), int(x.split()[1])) for x in open("input").read().split("\n")]
+def run(p2):
+    mappings = {'J': 11, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6,
+                '7': 7, '8': 8, '9': 9, 'T': 10, 'Q': 12, 'K': 13, 'A': 14}
+    if p2:
+        mappings['J'] = 0
+    inp = [(tuple(mappings[y] for y in x.split()[0]), int(x.split()[1])) for x in open("input").read().split("\n")]
+    inp = sorted(inp, key=cmp_to_key(lambda h1, h2: comp(h1, h2, p2)), reverse=True)
+    return sum(bid * (i + 1) for i, (_, bid) in enumerate(inp))
 
-inp = sorted(inp, key=cmp_to_key(lambda h1, h2: comp(h1, h2, False)), reverse=True)
-print("Part 1:", sum(bid * (i + 1) for i, (_, bid) in enumerate(inp)))
-
-inp = sorted(inp, key=cmp_to_key(lambda h1, h2: comp(h1, h2, True)), reverse=True)
-print("Part 2:", sum(bid * (i + 1) for i, (_, bid) in enumerate(inp)))
+print("Patt 1:", run(False))
+print("Part 2:", run(True))
