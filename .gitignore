@@ -1,4 +1,8 @@
 venv/
 .idea/
+.vscode/
+.DS_Store
 *.iml
 *.class
+input
+instructions
