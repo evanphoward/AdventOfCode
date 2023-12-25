@@ -52,7 +52,7 @@ My individual leaderboard placements thus far:
 | 24 / 1     | 49th  |
 | 24 / 2     | 83rd  |
 
-2023 (611 Total Points):
+2023 (720 Total Points, 86th Overall):
 
 | Day / Part | Place |
 |------------|-------|
@@ -68,3 +68,5 @@ My individual leaderboard placements thus far:
 | 20 / 2     | 45th  |
 | 23 / 1     | 28th  |
 | 23 / 2     | 72nd  |
+| 25 / 1     | 49th  |
+| 25 / 2     | 44th  |
