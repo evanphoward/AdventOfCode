@@ -4,12 +4,9 @@ mapping = {"one": "1", "two": "2", "three": "3", "four": "4",
 
 def check_mapping(string, ind, p2):
     if p2:
-        if len(string) > ind + 2 and string[ind: ind + 3] in mapping:
-            return mapping[string[ind: ind + 3]]
-        elif len(string) > ind + 3 and string[ind: ind + 4] in mapping:
-            return mapping[string[ind: ind + 4]]
-        elif len(string) > ind + 4 and string[ind: ind + 5] in mapping:
-            return mapping[string[ind: ind + 5]]
+        for i in range(2, 5):
+            if len(string) > ind + i and string[ind: ind + i + 1] in mapping:
+                return mapping[string[ind: ind + i + 1]]
     return string[ind] if string[ind].isdigit() else ""
 
 
