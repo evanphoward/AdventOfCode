@@ -12,28 +12,13 @@ for node in nodes_raw.split("\n"):
     right = node[3][:-1]
     nodes[root] = (left, right)
 
-cur = 'AAA'
-ans = 0
-while cur != 'ZZZ':
-    if lr[ans % len(lr)] == 'L':
-        cur = nodes[cur][0]
-    else:
-        cur = nodes[cur][1]
-    ans += 1
+def steps_to_z(cur):
+    steps = 0
+    while not cur.endswith('Z'):
+        cur = nodes[cur][0 if lr[steps % len(lr)] == 'L' else 1]
+        steps += 1
+    return steps
 
-print("Part 1:", ans)
-
-ans = []
-cur = list(filter(lambda x: x.endswith('A'), list(nodes.keys())))
-for c in cur:
-    ans_c = 0
-    while not c.endswith('Z'):
-        if lr[ans_c % len(lr)] == 'L':
-            c = nodes[c][0]
-        else:
-            c = nodes[c][1]
-        ans_c += 1
-    ans.append(ans_c)
-
-print("Part 2:", reduce(lambda x, y: (x*y)//math.gcd(x, y), ans))
+print("Part 1:", steps_to_z('AAA'))
+print("Part 2:", reduce(lambda x, y: (x*y)//math.gcd(x, y), [steps_to_z(node) for node in filter(lambda x: x.endswith('A'), list(nodes.keys()))]))
 
