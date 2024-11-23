@@ -2,20 +2,11 @@
 # Examples: 2016 Days 11, 13, 17, 24. 2021 Day 12, 2022 Day 12
 # Probably some more I can't find. Man, 2016 loved path-finding puzzles
 from collections import deque
+from MiscFiles.library import *
 GOAL = (2, 1)
 STARTING_POS = (1, 1)
 
-
-def parse_grid():
-    grid = dict()
-    inp = open("input").read().split("\n")
-    for r, row in enumerate(inp):
-        for c, cell in enumerate(row):
-            grid[r, c] = cell
-    return grid, len(inp), len(inp[0])
-
-
-maze, height, width = parse_grid()
+maze, height, width = get_grid(get_input(0, 0))
 
 bfs_q = deque()
 explored = set()
@@ -26,7 +17,7 @@ while bfs_q:
     if pos == GOAL:
         print(steps)
         break
-    for dr, dc in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+    for dr, dc in DIRS:
         new_pos = (pos[0] + dr, pos[1] + dc)
         if maze[new_pos] == "#":
             continue

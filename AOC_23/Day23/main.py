@@ -7,7 +7,7 @@ grid, nr, nc = get_grid(inp)
 splits = set()
 for r in range(1, nr - 1):
     for c in range(1, nc - 1):
-        if grid[r, c] == "." and sum(grid[r + dr, c + dc] == "#" for (dr, dc) in [(1, 0), (-1, 0), (0, 1), (0, -1)]) < 2:
+        if grid[r, c] == "." and sum(grid[r + dr, c + dc] == "#" for (dr, dc) in DIRS) < 2:
             splits.add((r, c))
 splits.add((0, 1))
 splits.add((nr - 1, nc - 2))
