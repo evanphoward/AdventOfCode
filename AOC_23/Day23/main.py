@@ -1,12 +1,8 @@
+from MiscFiles.library import *
 from collections import deque, defaultdict
 
-grid = dict()
-inp = open("input").read().split("\n")
-for r, row in enumerate(inp):
-    for c, cell in enumerate(row):
-        grid[r, c] = cell
-nr = len(inp)
-nc = len(inp[0])
+inp = get_input(2023, 23)
+grid, nr, nc = get_grid(inp)
 
 splits = set()
 for r in range(1, nr - 1):

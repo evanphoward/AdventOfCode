@@ -1,7 +1,8 @@
+from MiscFiles.library import *
 import networkx as nx
 
 G = nx.Graph()
-for line in open("input").read().split("\n"):
+for line in get_input(2023, 25).split("\n"):
     label, neighbors = line.split(": ")
     neighbors = neighbors.split()
     for n in neighbors:

@@ -1,6 +1,12 @@
 import requests
 
+DIRS = [(1, 0), (0, 1), (-1, 0), (0, -1)]
+DIRS_WITH_CORNERS = [(1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1), (0, -1), (1, -1)]
+
 def get_input(year, day):
+    if year == 0 and day == 0:
+        print("SET YEAR AND DAY VALUES!")
+        exit(1)
     try:
         return open("input").read()
     except FileNotFoundError:
@@ -10,3 +16,12 @@ def get_input(year, day):
         open("input", "w").write(response)
         return response
 
+def get_grid(inp):
+    grid = dict()
+    inp = inp.split('\n')
+    for r, row in enumerate(inp):
+        for c, cell in enumerate(row):
+            grid[r, c] = cell
+    nr = len(inp)
+    nc = len(inp[0])
+    return grid, nr, nc

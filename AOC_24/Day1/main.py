@@ -6,7 +6,7 @@ import networkx
 import functools
 import numpy as np
 
-raw_inp = get_input(0, 0).split("\n")
+raw_inp = get_input(2024, 1).split("\n")
 inp = []
 for x in raw_inp:
     inp.append(int(x))
