@@ -1,4 +1,6 @@
-inp = open("input").read().split("\n")
+from MiscFiles.library import *
+
+inp = get_input(2023, 2).split("\n")
 inp = [[y.split() for y in x.split(";")] for x in inp]
 p1, p2 = 0, 0
 

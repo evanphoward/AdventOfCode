@@ -6,3 +6,4 @@ venv/
 *.class
 input
 instructions
+session-key

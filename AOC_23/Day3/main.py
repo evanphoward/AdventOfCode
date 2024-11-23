@@ -1,4 +1,6 @@
-inp = open("input").read().split("\n")
+from MiscFiles.library import *
+
+inp = get_input(2023,3).split("\n")
 ans = 0
 grid = {}
 marked = {}
