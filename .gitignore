@@ -1,6 +1,7 @@
 venv/
 .idea/
 .vscode/
+__pycache__/
 .DS_Store
 *.iml
 *.class
