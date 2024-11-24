@@ -1,5 +1,4 @@
-import functools
-from collections import defaultdict
+from MiscFiles.library import *
 
 def get_points_from_pos(init_pos, final_pos):
     points = set()
@@ -43,7 +42,7 @@ class Brick:
 
 
 bricks = []
-for i, line in enumerate(open("input").read().split("\n")):
+for i, line in enumerate(get_input(2023, 22).split("\n")):
     init_pos, final_pos = line.split("~")
     init_pos = tuple(map(int, init_pos.split(",")))
     final_pos = tuple(map(int, final_pos.split(",")))

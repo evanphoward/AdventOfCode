@@ -1,4 +1,4 @@
-from collections import defaultdict, deque
+from MiscFiles.library import *
 
 modules = dict()
 receive_from = defaultdict(dict)
@@ -6,7 +6,7 @@ receive_from = defaultdict(dict)
 FLIP_FLOP = 1
 CONJUNCTION = 2
 ans = 0
-for line in open("input").read().split("\n"):
+for line in get_input(2023, 20).split("\n"):
     label, out = line.split(" -> ")
     typ = 0
     if label[0] == "%":

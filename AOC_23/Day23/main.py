@@ -1,5 +1,4 @@
 from MiscFiles.library import *
-from collections import deque, defaultdict
 
 inp = get_input(2023, 23)
 grid, nr, nc = get_grid(inp)

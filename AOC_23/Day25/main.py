@@ -1,5 +1,4 @@
 from MiscFiles.library import *
-import networkx as nx
 
 G = nx.Graph()
 for line in get_input(2023, 25).split("\n"):

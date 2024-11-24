@@ -1,7 +1,6 @@
-import numpy as np
-import z3
+from MiscFiles.library import *
 
-inp = open("input").read().split("\n")
+inp = get_input(2023, 24).split("\n")
 points = []
 for line in inp:
     pos, vel = line.split(" @ ")

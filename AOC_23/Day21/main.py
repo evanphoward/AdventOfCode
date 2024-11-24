@@ -1,8 +1,7 @@
-import functools
-import numpy as np
+from MiscFiles.library import *
 
 STARTING_POS = (-1, -1)
-inp = open("input").read().split("\n")
+inp = get_input(2023, 21).split("\n")
 grid = dict()
 for r, row in enumerate(inp):
     for c, cell in enumerate(row):

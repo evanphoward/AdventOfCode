@@ -1,7 +1,17 @@
 import requests
+from collections import deque, defaultdict, Counter
+import itertools
+import z3
+import networkx as nx
+import functools
+import heapq
+import math
+import re
+import numpy as np
 
 DIRS = [(1, 0), (0, 1), (-1, 0), (0, -1)]
 DIRS_WITH_CORNERS = [(1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1), (0, -1), (1, -1)]
+
 
 def get_input(year, day):
     if year == 0 and day == 0:
@@ -15,6 +25,7 @@ def get_input(year, day):
         response = requests.get(target_url, cookies={'session':session_key}).text.strip()
         open("input", "w").write(response)
         return response
+
 
 def get_grid(inp):
     grid = dict()
