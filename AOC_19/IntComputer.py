@@ -1,7 +1,7 @@
 class IntProcess:
-    def __init__(self, program=False):
+    def __init__(self, program=None):
         if program:
-            self.prog = [int(i) for i in program.readline().split(",")]
+            self.prog = [int(i) for i in program.split(",")]
         self.ip = 0
         self.rb = 0
 

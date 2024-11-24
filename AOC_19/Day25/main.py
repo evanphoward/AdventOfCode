@@ -1,7 +1,7 @@
-import itertools
 from AOC_19.IntComputer import IntProcess
+from MiscFiles.library import *
 
-droid = IntProcess(open("input"))
+droid = IntProcess(get_input(2019, 25))
 # while True:
 #     user_inp = input()
 #     user_inp = [ord(c) for c in user_inp] + [10]
