@@ -51,11 +51,10 @@ class Program:
 
 inp = get_input(2017, 18).split("\n")
 program = Program()
-while True:
+last_sound = None
+while not last_sound:
     last_sound = program.step()
-    if last_sound:
-        print("Part 1:", last_sound)
-        break
+print("Part 1:", last_sound)
 
 program_0 = Program(0)
 program_1 = Program(1)
