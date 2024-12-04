@@ -11,6 +11,7 @@ import numpy as np
 
 DIRS = [(1, 0), (0, 1), (-1, 0), (0, -1)]
 DIRS_WITH_CORNERS = [(1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1), (0, -1), (1, -1)]
+CORNERS = [(1, 1), (-1, -1), (-1, 1), (1, -1)]
 
 
 def get_input(year, day):
