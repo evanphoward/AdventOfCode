@@ -20,7 +20,7 @@ def simulate(grid, p1):
         seen.add((gr, gc, heading))
         dr, dc = DIRS[heading]
         if (gr + dr, gc + dc) not in grid:
-            return len(set((r, c) for (r, c, _) in seen)) if p1 else False
+            return set((r, c) for (r, c, _) in seen) if p1 else False
         if grid[(gr + dr, gc + dc)] == '.':
             gr += dr
             gc += dc
@@ -28,14 +28,14 @@ def simulate(grid, p1):
             heading = (heading + 1) % 4
 
 
-print("Part 1:", simulate(grid, True))
+visited_cells = simulate(grid, True)
+print("Part 1:", len(visited_cells))
 
 ans = 0
-for r in range(nr):
-    for c in range(nc):
-        if (r, c) == STARTING_POS or grid[(r, c)] == '#':
-            continue
-        grid_c = grid.copy()
-        grid_c[(r, c)] = '#'
-        ans += simulate(grid_c, False)
+for (r, c) in visited_cells:
+    if (r, c) == STARTING_POS:
+        continue
+    grid_c = grid.copy()
+    grid_c[(r, c)] = '#'
+    ans += simulate(grid_c, False)
 print("Part 2:", ans)
