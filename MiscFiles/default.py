@@ -13,4 +13,4 @@ inp = get_input(0, 0).split("\n")
 for line in inp:
     continue
 
-print(ans)
+submit_ans(0, 0, 1, ans)
